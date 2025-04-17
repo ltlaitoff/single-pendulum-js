@@ -1,16 +1,18 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
 	margin: 0;
 	padding: 0;
 }
 
 :root {
-    --primary-color: #fafafa;
+	--primary-color: #fafafa;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+	:root {
 		--primary-color: #333;
-  }
+	}
 }
 
 #root {

@@ -1,21 +1,33 @@
-import { assert } from './pkg/assert/assert'
 import * as render from './render'
-
-/**
- * @type {HTMLCanvasElement}
- */
-const canvas = document.getElementById('canvas')
-assert(canvas !== undefined, 'Canvas is undefined')
 
 const WIDTH = 480
 const HEIGHT = 480
+const START_POINT = { x: WIDTH / 2, y: HEIGHT / 2 }
 
-const START_POINT = { x: WIDTH / 2, y: HEIGHT / 8 }
+const canvas = document.getElementById('canvas')
+
+if (!(canvas instanceof HTMLCanvasElement)) {
+	throw new Error('Canvas is undefined')
+}
+
+const ctx = canvas.getContext('2d')
+
+if (!(ctx instanceof CanvasRenderingContext2D)) {
+	throw new Error('Ctx is undefined')
+}
+
+let i = 0
 
 /**
- * @type {CanvasRenderingContext2D}
+ * @param {CanvasRenderingContext2D} ctx
  */
-const ctx = canvas.getContext('2d')
-assert(ctx !== null, 'Ctx is null')
+function main(ctx) {
+	let angle = 0
 
-render.render(ctx, START_POINT, 90, 200)
+	setInterval(() => {
+		angle += 5
+		render.render(ctx, START_POINT, angle, 200)
+	}, 1000 / 60)
+}
+
+main(ctx)

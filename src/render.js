@@ -14,6 +14,10 @@ const CIRCLE_SIZE = 5
  * @param {number} length - Length
  */
 export function render(ctx, startPoint, angle, length) {
+	ctx.fillStyle = 'rgba(255, 0, 0)'
+	ctx.strokeStyle = 'rgba(255, 0, 0)'
+	clear(ctx)
+
 	renderCircle(ctx, startPoint, CIRCLE_SIZE)
 
 	const endPoint = math.calculateEndPoint(math.degreeToRadian(angle), length)
@@ -27,11 +31,23 @@ export function render(ctx, startPoint, angle, length) {
 
 /**
  * @param {CanvasRenderingContext2D} ctx
+ */
+function clear(ctx) {
+	ctx.clearRect(0, 0, 480, 480)
+}
+
+/**
+ * @param {CanvasRenderingContext2D} ctx
  * @param {Coords} coords
+ * @param {number} size
  */
 function renderCircle(ctx, coords, size) {
+	ctx.beginPath()
+
 	ctx.arc(coords.x, coords.y, size, 0, 2 * Math.PI)
 	ctx.fill()
+
+	ctx.closePath()
 }
 
 /**
@@ -45,6 +61,6 @@ function renderLine(ctx, startPoint, endPoint) {
 	ctx.moveTo(startPoint.x, startPoint.y)
 	ctx.lineTo(endPoint.x, endPoint.y)
 
-	ctx.closePath()
 	ctx.stroke()
+	// ctx.closePath()
 }
